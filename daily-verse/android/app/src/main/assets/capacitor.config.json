@@ -1,0 +1,6 @@
+{
+	"appId": "com.roy.dailyverse",
+	"appName": "Daily Verse",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
