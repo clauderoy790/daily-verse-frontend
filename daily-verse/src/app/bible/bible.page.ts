@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BibleService } from './../bible.service';
 
 @Component({
   selector: 'app-bible',
@@ -6,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bible.page.scss'],
 })
 export class BiblePage implements OnInit {
-  constructor() {}
+  randomVerse = '';
+  constructor(private bible: BibleService) {
+    console.log('in the bible pge');
+  }
 
-  ngOnInit() {
-    console.log('init bible page');
+  ngOnInit() {}
+
+  getVerseClick() {
+    this.bible.getRandomVerse().subscribe((v) => (this.randomVerse = v));
   }
 }
