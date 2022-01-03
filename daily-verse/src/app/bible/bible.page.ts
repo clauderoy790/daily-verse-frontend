@@ -11,7 +11,7 @@ import { BibleVerse } from './../_models/bible-verse';
 export class BiblePage implements OnInit {
   today: Date;
   randomVerse: BibleVerse;
-  constructor(private bible: BibleService, public favorites:FavoritesService) {
+  constructor(private bible: BibleService, public favorites: FavoritesService) {
     this.today = new Date();
   }
 
