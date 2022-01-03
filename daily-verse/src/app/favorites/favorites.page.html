@@ -5,5 +5,13 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-list >
+<div *ngFor="let verse of verses">
+  <ion-item (click)="verseClick(verse)">
+    <ion-label>
+      {{verse.book + ' ' + verse.chapter +':' +verse.verse}}
+    </ion-label>
+  </ion-item>
+</div>
+  </ion-list>
 </ion-content>

@@ -8,7 +8,8 @@ import { BibleVerse } from './_models/bible-verse';
 export class FavoritesService {
   favorites: BibleVerse[] = [];
 
-  constructor(private storage: Storage) {}
+  constructor(private storage: Storage) {
+  }
 
   init(): Promise<void> {
     return new Promise<void>((resolve, reject) => {

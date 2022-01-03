@@ -7,10 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FavoritesService } from './favorites.service';
 
-// const startupServiceFactory = (favorites: FavoritesService) => {
-//   favorites.test();
-// };
-
 const startupServiceFactory = (favorites: FavoritesService) => {
   return () => favorites.init();
 };
@@ -25,7 +21,6 @@ const startupServiceFactory = (favorites: FavoritesService) => {
     HttpClientModule,
     IonicStorageModule.forRoot(),
   ],
-  // providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   providers: [
     FavoritesService,
     {
