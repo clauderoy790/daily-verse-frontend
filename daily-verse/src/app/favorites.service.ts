@@ -28,19 +28,14 @@ export class FavoritesService {
   save(verse: BibleVerse): void {
     this.favorites.push(verse);
     this.storage.set('favorites',this.favorites);
-    
   }
 
   remove(verse: BibleVerse): void {
     this.favorites = this.favorites.filter (fa => !isEqual(fa,verse));
     this.storage.set('favorites',this.favorites);
-    
   }
 
   isSaved(verse: BibleVerse): boolean {
-    
-    // check if item is in array
-    // if yes, return true, if not, return false
-    return false;
+    return this.favorites.some(fa => isEqual(fa,verse));
   }
 }
