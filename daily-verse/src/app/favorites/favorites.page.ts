@@ -12,20 +12,6 @@ export class FavoritesPage implements OnInit {
   verses: BibleVerse[] = [];
   constructor(private router: Router, private favorites: FavoritesService) {
     console.log('ready to read it');
-    const v: BibleVerse = {
-      book: 'John',
-      chapter: 2,
-      verse: 1,
-      text: 'salut les amis',
-    };
-    const v2: BibleVerse = {
-      book: 'Luke',
-      chapter: 18,
-      verse: 4,
-      text: 'this is another verse',
-    };
-    this.verses.push(v);
-    this.verses.push(v2);
   }
 
   ngOnInit(): void {}

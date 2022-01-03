@@ -13,7 +13,7 @@ import { BibleVerse } from './../_models/bible-verse';
 })
 export class BiblePage implements OnInit {
   today: Date;
-  randomVerse: BibleVerse;
+  verse: BibleVerse;
   private destroyed$ = new Subject();
   constructor(
     private router: Router,
@@ -31,21 +31,29 @@ export class BiblePage implements OnInit {
       .subscribe((event: any) => {
         const verse = this.router.getCurrentNavigation()?.extras?.state?.verse;
         if (verse) {
-          this.randomVerse = verse;
+          this.verse = verse;
         }
       });
   }
 
   getVerseTitle() {
-    if (!this.randomVerse) {
+    if (!this.verse) {
       return '';
     }
-    return `${this.randomVerse.book} ${this.randomVerse.chapter}:${this.randomVerse.verse}`;
+    return `${this.verse.book} ${this.verse.chapter}:${this.verse.verse}`;
   }
 
-  favoriteClick() {}
+  favoriteClick() {
+    console.log('favorite click');
+    
+    if(this.favorites.isSaved(this.verse)){
+      this.favorites.remove(this.verse);
+    } else {
+      this.favorites.save(this.verse);
+    }
+  }
 
   getVerseClick() {
-    this.bible.getRandomVerse().subscribe((v) => (this.randomVerse = v));
+    this.bible.getRandomVerse().subscribe((v) => (this.verse = v));
   }
 }
