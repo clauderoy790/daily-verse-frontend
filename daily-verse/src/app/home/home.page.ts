@@ -9,6 +9,5 @@ export class HomePage implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log('init home');
   }
 }

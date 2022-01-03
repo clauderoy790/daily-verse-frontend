@@ -1,10 +1,19 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicStorageModule } from '@ionic/storage-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FavoritesService } from './favorites.service';
+
+// const startupServiceFactory = (favorites: FavoritesService) => {
+//   favorites.test();
+// };
+
+const startupServiceFactory = (favorites: FavoritesService) => {
+  return () => favorites.init();
+};
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,8 +23,19 @@ import { AppComponent } from './app.component';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    IonicStorageModule.forRoot(),
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  // providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    FavoritesService,
+    {
+      provide: APP_INITIALIZER,
+      multi: true,
+      useFactory: startupServiceFactory,
+      useClass: IonicRouteStrategy,
+      deps: [FavoritesService],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

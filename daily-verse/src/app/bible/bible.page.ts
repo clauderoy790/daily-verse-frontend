@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FavoritesService } from '../favorites.service';
 import { BibleService } from './../bible.service';
+import { BibleVerse } from './../_models/bible-verse';
 
 @Component({
   selector: 'app-bible',
@@ -7,12 +9,22 @@ import { BibleService } from './../bible.service';
   styleUrls: ['./bible.page.scss'],
 })
 export class BiblePage implements OnInit {
-  randomVerse = '';
-  constructor(private bible: BibleService) {
-    console.log('in the bible pge');
+  today: Date;
+  randomVerse: BibleVerse;
+  constructor(private bible: BibleService, public favorites:FavoritesService) {
+    this.today = new Date();
   }
 
   ngOnInit() {}
+
+  getVerseTitle() {
+    if (!this.randomVerse) {
+      return '';
+    }
+    return `${this.randomVerse.book} ${this.randomVerse.chapter}:${this.randomVerse.verse}`;
+  }
+
+  favoriteClick() {}
 
   getVerseClick() {
     this.bible.getRandomVerse().subscribe((v) => (this.randomVerse = v));
