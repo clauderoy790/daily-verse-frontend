@@ -1,3 +1,4 @@
+import { isEqual } from 'lodash';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { BibleVerse } from './_models/bible-verse';
@@ -25,16 +26,19 @@ export class FavoritesService {
   }
 
   save(verse: BibleVerse): void {
-    // add item to array
-    // save storage
+    this.favorites.push(verse);
+    this.storage.set('favorites',this.favorites);
+    
   }
 
   remove(verse: BibleVerse): void {
-    // remove item from array
-    // save storage
+    this.favorites = this.favorites.filter (fa => !isEqual(fa,verse));
+    this.storage.set('favorites',this.favorites);
+    
   }
 
   isSaved(verse: BibleVerse): boolean {
+    
     // check if item is in array
     // if yes, return true, if not, return false
     return false;
