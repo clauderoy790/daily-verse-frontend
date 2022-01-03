@@ -1,6 +1,7 @@
-import { isEqual } from 'lodash';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
+import { isEqual } from 'lodash';
+import { BehaviorSubject } from 'rxjs';
 import { BibleVerse } from './_models/bible-verse';
 
 @Injectable({
@@ -8,15 +9,22 @@ import { BibleVerse } from './_models/bible-verse';
 })
 export class FavoritesService {
   favorites: BibleVerse[] = [];
+  changed: BehaviorSubject<BibleVerse[]> = new BehaviorSubject([]);
 
-  constructor(private storage: Storage) {
-  }
+  constructor(private storage: Storage) {}
 
   init(): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       this.storage
         .create()
         .then((s) => {
+          this.storage
+            .get('favorites')
+            .then((val) => {
+              this.favorites = val ?? [];
+              this.changed.next(this.favorites);
+            })
+            .catch((r) => reject());
           resolve();
         })
         .catch((reason) => {
@@ -27,15 +35,17 @@ export class FavoritesService {
 
   save(verse: BibleVerse): void {
     this.favorites.push(verse);
-    this.storage.set('favorites',this.favorites);
+    this.changed.next(this.favorites);
+    this.storage.set('favorites', this.favorites);
   }
 
   remove(verse: BibleVerse): void {
-    this.favorites = this.favorites.filter (fa => !isEqual(fa,verse));
-    this.storage.set('favorites',this.favorites);
+    this.favorites = this.favorites.filter((fa) => !isEqual(fa, verse));
+    this.changed.next(this.favorites);
+    this.storage.set('favorites', this.favorites);
   }
 
   isSaved(verse: BibleVerse): boolean {
-    return this.favorites.some(fa => isEqual(fa,verse));
+    return this.favorites.some((fa) => isEqual(fa, verse));
   }
 }

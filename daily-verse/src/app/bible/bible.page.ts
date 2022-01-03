@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { NavigationStart, Router, RouterEvent } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { FavoritesService } from '../favorites.service';
 import { BibleService } from './../bible.service';
 import { BibleVerse } from './../_models/bible-verse';
@@ -11,7 +11,7 @@ import { BibleVerse } from './../_models/bible-verse';
   templateUrl: './bible.page.html',
   styleUrls: ['./bible.page.scss'],
 })
-export class BiblePage implements OnInit {
+export class BiblePage implements OnInit, OnDestroy {
   today: Date;
   verse: BibleVerse;
   private destroyed$ = new Subject();
@@ -25,15 +25,18 @@ export class BiblePage implements OnInit {
 
   ngOnInit() {
     this.router.events
-      .pipe(
-        takeUntil(this.destroyed$)
-      )
+      .pipe(takeUntil(this.destroyed$))
       .subscribe((event: any) => {
         const verse = this.router.getCurrentNavigation()?.extras?.state?.verse;
         if (verse) {
           this.verse = verse;
         }
       });
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 
   getVerseTitle() {
@@ -45,8 +48,8 @@ export class BiblePage implements OnInit {
 
   favoriteClick() {
     console.log('favorite click');
-    
-    if(this.favorites.isSaved(this.verse)){
+
+    if (this.favorites.isSaved(this.verse)) {
       this.favorites.remove(this.verse);
     } else {
       this.favorites.save(this.verse);
