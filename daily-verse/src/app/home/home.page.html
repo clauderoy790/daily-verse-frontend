@@ -3,7 +3,22 @@
     <ion-title>Home</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-  <ion-item> salut </ion-item>
+  <ion-item>
+    <ion-label>{{today | date:'MMMM d'}}</ion-label>
+  </ion-item>
+  <ion-item *ngIf="verse">
+    <ion-label>{{getVerseTitle()}}</ion-label>
+  </ion-item>
+  <ion-item *ngIf="verse">
+    <ion-label>{{verse.text}}</ion-label>
+  </ion-item>
+  <ion-item *ngIf="verse" (click)="favoriteClick()">
+    <ion-icon
+      name="{{favorites.isSaved(verse) ? 'heart' : 'heart-outline'}}"
+    ></ion-icon>
+  </ion-item>
+  <ion-item>
+    <ion-button (click)="getVerseClick()">Get random verse</ion-button>
+  </ion-item>
 </ion-content>
