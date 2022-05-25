@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Notes</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <div *ngFor="let note of notes; index as i">
+      <ion-item text-wrap>
+        <ion-label text-overflow>{{note}}</ion-label>
+        <ion-button (click)="removeNote(i)">Remove</ion-button>
+      </ion-item>
+    </div>
+  </ion-list>
+  <ion-icon
+    name="add-circle-outline"
+    (click)="this.addingNewNote = true"
+  ></ion-icon>
+  <div *ngIf="this.addingNewNote">
+    <ion-input [(ngModel)]="note"></ion-input>
+    <ion-button (click)="this.addNewNote()">Add</ion-button>
+  </div>
+</ion-content>

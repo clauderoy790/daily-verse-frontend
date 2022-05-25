@@ -19,6 +19,11 @@ const routes: Routes = [
       import('./bible/bible.module').then((m) => m.BiblePageModule),
   },
   {
+    path: 'notes',
+    loadChildren: () =>
+      import('./notes/notes.module').then((m) => m.NotesPageModule),
+  },
+  {
     path: 'favorites',
     loadChildren: () =>
       import('./favorites/favorites.module').then((m) => m.FavoritesPageModule),

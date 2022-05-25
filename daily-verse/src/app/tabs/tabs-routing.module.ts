@@ -29,6 +29,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'notes',
+        loadChildren: () =>
+          import('../notes/notes-routing.module').then(
+            (m) => m.NotesPageRoutingModule
+          ),
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full',
