@@ -8,6 +8,7 @@ import { BibleVerse } from './_models/bible-verse';
   providedIn: 'root',
 })
 export class FavoritesService {
+  readonly key = 'favorites'
   favorites: BibleVerse[] = [];
   changed: BehaviorSubject<BibleVerse[]> = new BehaviorSubject([]);
 
@@ -19,7 +20,7 @@ export class FavoritesService {
         .create()
         .then((s) => {
           this.storage
-            .get('favorites')
+            .get(this.key)
             .then((val) => {
               this.favorites = val ?? [];
               this.changed.next(this.favorites);
@@ -36,13 +37,13 @@ export class FavoritesService {
   save(verse: BibleVerse): void {
     this.favorites.push(verse);
     this.changed.next(this.favorites);
-    this.storage.set('favorites', this.favorites);
+    this.storage.set(this.key, this.favorites);
   }
 
   remove(verse: BibleVerse): void {
     this.favorites = this.favorites.filter((fa) => !isEqual(fa, verse));
     this.changed.next(this.favorites);
-    this.storage.set('favorites', this.favorites);
+    this.storage.set(this.key, this.favorites);
   }
 
   isSaved(verse: BibleVerse): boolean {

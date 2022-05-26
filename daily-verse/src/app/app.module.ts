@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,15 +20,16 @@ const startupServiceFactory = (favorites: FavoritesService) => {
   declarations: [AppComponent, HomePage, BiblePage, FavoritesPage],
   entryComponents: [],
   imports: [
+    IonicStorageModule.forRoot(),
     CommonModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    IonicStorageModule.forRoot(),
   ],
   providers: [
     FavoritesService,
+    Keyboard,
     {
       provide: APP_INITIALIZER,
       multi: true,

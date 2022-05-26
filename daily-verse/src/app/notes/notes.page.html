@@ -8,16 +8,49 @@
     <div *ngFor="let note of notes; index as i">
       <ion-item text-wrap>
         <ion-label text-overflow>{{note}}</ion-label>
+        <ion-button [disabled]="this.isEditingNote" (click)="this.editNote(i)"
+          >Edit</ion-button
+        >
         <ion-button (click)="removeNote(i)">Remove</ion-button>
       </ion-item>
+      <div *ngIf="this.isEditingNote">
+        <ion-item>
+          <ion-textarea [(ngModel)]="this.editedNote"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-button (click)="saveEdit(i)" shape="round">Save</ion-button>
+          <ion-button (click)="cancelEdit()" shape="round">Cancel</ion-button>
+        </ion-item>
+      </div>
     </div>
   </ion-list>
-  <ion-icon
-    name="add-circle-outline"
-    (click)="this.addingNewNote = true"
-  ></ion-icon>
   <div *ngIf="this.addingNewNote">
-    <ion-input [(ngModel)]="note"></ion-input>
-    <ion-button (click)="this.addNewNote()">Add</ion-button>
+    <ion-item>
+      <ion-label>Note:</ion-label>
+      <ion-input
+        #inputNewNote
+        [placeholder]="'My awesome note'"
+        [(ngModel)]="note"
+      ></ion-input>
+    </ion-item>
+    <ion-button [disabled]="!this.note.length" (click)="this.addNewNote()" shape="round">Add</ion-button>
   </div>
+
+  <!-- footer -->
+  <ion-grid>
+    <ion-row *ngIf="!this.addingNewNote" class="ion-align-items-center">
+      <ion-col size="6" class="ion-text-cener">
+        <ion-item>
+          <ion-button (click)="newNote()" expand="block" shape="round">
+            New Note
+          </ion-button>
+        </ion-item>
+      </ion-col>
+      <ion-col *ngIf="this.undos.length" size="6" class="ion-text-cener">
+        <ion-item>
+          <ion-button (click)="this.undo()" shape="round">Undo</ion-button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

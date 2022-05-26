@@ -28,6 +28,18 @@ const routes: Routes = [
     loadChildren: () =>
       import('./favorites/favorites.module').then((m) => m.FavoritesPageModule),
   },
+  {
+    path: 'books',
+    loadChildren: () => import('./books/books.module').then( m => m.BooksPageModule)
+  },
+  {
+    path: 'chapters',
+    loadChildren: () => import('./chapters/chapters.module').then( m => m.ChaptersPageModule)
+  },
+  {
+    path: 'verses',
+    loadChildren: () => import('./verses/verses.module').then( m => m.VersesPageModule)
+  },
 ];
 @NgModule({
   imports: [

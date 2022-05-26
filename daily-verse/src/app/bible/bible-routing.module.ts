@@ -1,13 +1,24 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
+import { NEW_TESTAMENT_BOOKS, OLD_TESTAMENT_BOOKS } from '../bible.service';
+import { ChaptersPage } from '../chapters/chapters.page';
 import { BiblePage } from './bible.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: BiblePage
-  }
+    component: BiblePage,
+  },
+  {
+    path: 'old',
+    data: OLD_TESTAMENT_BOOKS,
+    component: ChaptersPage,
+  },
+  {
+    path: 'new',
+    data: NEW_TESTAMENT_BOOKS,
+    component: ChaptersPage,
+  },
 ];
 
 @NgModule({

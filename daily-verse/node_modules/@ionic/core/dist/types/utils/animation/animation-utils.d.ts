@@ -1,4 +1,4 @@
-import { AnimationKeyFrames } from './animation-interface';
+import type { AnimationKeyFrames } from './animation-interface';
 /**
  * Web Animations requires hyphenated CSS properties
  * to be written in camelCase when animating
