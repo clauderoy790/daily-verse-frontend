@@ -27,7 +27,6 @@ export class FavoritesPage implements OnInit, OnDestroy {
   }
 
   verseClick(verse: BibleVerse) {
-    console.log('clicked the verse: ', verse);
     this.router.navigate(['tabs/bible'], { state: { verse } });
   }
 }

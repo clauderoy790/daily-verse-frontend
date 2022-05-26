@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Chapter } from '../_models/chapter';
+import { Book } from './../_models/book';
 
 @Component({
   selector: 'app-verses',
@@ -6,10 +9,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./verses.page.scss'],
 })
 export class VersesPage implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  chapter: Chapter;
+  book: Book;
+  constructor(private router: Router) {
+    const state = this.router.getCurrentNavigation().extras.state;
+    this.chapter = state.chapter;
+    this.book = state.book;
   }
 
+  ngOnInit() {}
 }

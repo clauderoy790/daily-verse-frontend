@@ -1,9 +1,22 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>chapters</ion-title>
+    <ion-title>{{book.book}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div *ngIf="book">
+    <ion-item>
+      <ion-label>{{book.chapters.length}} Chapters</ion-label>
+    </ion-item>
+    <ion-list>
+      <ion-item
+        *ngFor="let chapter of book.chapters"
+        (click)="goToChapter(chapter)"
+      >
+        <ion-label>{{chapter.chapter}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="!book">Loading book data...</div>
 </ion-content>

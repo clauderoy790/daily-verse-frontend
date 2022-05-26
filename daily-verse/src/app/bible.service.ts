@@ -12,8 +12,6 @@ export class BibleService {
   constructor(private http: HttpClient) {
     this.http.get<string[]>('../assets/bible/Books.json').subscribe((books) => {
       this.books = books;
-      console.log('old testament: ', OLD_TESTAMENT_BOOKS.length);
-      console.log('new count: ', NEW_TESTAMENT_BOOKS.length);
     });
   }
 

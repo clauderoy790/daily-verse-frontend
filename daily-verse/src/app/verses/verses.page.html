@@ -1,9 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>verses</ion-title>
+    <ion-title>{{book.book}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-item>
+    <ion-label>{{chapter.chapter}}</ion-label>
+  </ion-item>
+  <ion-list>
+    <ion-item *ngFor="let verse of chapter.verses">
+      <ion-label>{{verse.verse}}</ion-label>
+      <ion-label>{{verse.text}}</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
