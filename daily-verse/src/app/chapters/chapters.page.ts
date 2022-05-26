@@ -14,12 +14,14 @@ export class ChaptersPage implements OnInit {
   book: Book;
   constructor(private router: Router, private bibleService: BibleService) {
     const book = this.router.getCurrentNavigation().extras.state.book;
+    console.log('book: ', book);
+
     this.bibleService
       .getBook(book)
       .pipe(take(1))
       .subscribe((b) => {
         this.book = b;
-        console.log('book: ');
+        console.log('book after: ');
         console.log(this.book);
       });
   }
@@ -27,6 +29,6 @@ export class ChaptersPage implements OnInit {
   ngOnInit() {}
 
   goToChapter(chapter: Chapter) {
-    this.router.navigate(['tabs/verses'], { state: { chapter } });
+    this.router.navigate(['verses'], { state: { chapter, book: this.book } });
   }
 }

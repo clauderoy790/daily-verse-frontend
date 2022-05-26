@@ -7,7 +7,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BiblePage } from './bible/bible.page';
 import { FavoritesService } from './favorites.service';
 import { FavoritesPage } from './favorites/favorites.page';
 import { HomePage } from './home/home.page';
@@ -17,7 +16,7 @@ const startupServiceFactory = (favorites: FavoritesService) => {
 };
 
 @NgModule({
-  declarations: [AppComponent, HomePage, BiblePage, FavoritesPage],
+  declarations: [AppComponent, HomePage, FavoritesPage],
   entryComponents: [],
   imports: [
     IonicStorageModule.forRoot(),

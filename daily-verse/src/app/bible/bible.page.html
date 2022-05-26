@@ -6,16 +6,12 @@
 
 <ion-content>
   <div>
-    <ion-tabs>
-      <ion-tab-bar slot="top">
-        <ion-tab-button (ionSelect)="setBooks(OLD_TESTAMENT_BOOKS)">
-          <ion-label>Old Testament</ion-label>
-        </ion-tab-button>
-        <ion-tab-button (ionSelect)="setBooks(NEW_TESTAMENT_BOOKS)">
-          <ion-label>New Testament</ion-label>
-        </ion-tab-button>
-      </ion-tab-bar>
-    </ion-tabs>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" (click)="setBooks(oldBooks)">Old Testament</ion-col>
+        <ion-col size="6" (click)="setBooks(newBooks)">New Testament</ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
   <div>
     <ion-list>

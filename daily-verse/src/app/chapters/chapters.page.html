@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{book.book}}</ion-title>
+    <ion-title>{{book?.book}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,7 +14,7 @@
         *ngFor="let chapter of book.chapters"
         (click)="goToChapter(chapter)"
       >
-        <ion-label>{{chapter.chapter}}</ion-label>
+        <ion-label>Chapter {{chapter.chapter}}</ion-label>
       </ion-item>
     </ion-list>
   </div>
