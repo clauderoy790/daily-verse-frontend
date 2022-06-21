@@ -10,11 +10,19 @@
       <ion-label>{{book.chapters.length}} Chapters</ion-label>
     </ion-item>
     <ion-list>
-      <ion-item
-        *ngFor="let chapter of book.chapters"
-        (click)="goToChapter(chapter)"
-      >
-        <ion-label>Chapter {{chapter.chapter}}</ion-label>
+      <ion-item *ngFor="let i of chapterIndexes">
+        <div class="chapter" (click)="goToChapter(i*4)">
+          {{getChapterDisplay((i*4))}}
+        </div>
+        <div class="chapter" (click)="goToChapter((i*4)+1)">
+          {{getChapterDisplay((i*4)+1)}}
+        </div>
+        <div class="chapter" (click)="goToChapter((i*4)+2)">
+          {{getChapterDisplay((i*4)+2)}}
+        </div>
+        <div class="chapter" (click)="goToChapter((i*4)+3)">
+          {{getChapterDisplay((i*4)+3)}}
+        </div>
       </ion-item>
     </ion-list>
   </div>

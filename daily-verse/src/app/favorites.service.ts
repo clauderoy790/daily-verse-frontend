@@ -8,7 +8,7 @@ import { BibleVerse } from './_models/bible-verse';
   providedIn: 'root',
 })
 export class FavoritesService {
-  readonly key = 'favorites'
+  readonly key = 'favorites';
   favorites: BibleVerse[] = [];
   changed: BehaviorSubject<BibleVerse[]> = new BehaviorSubject([]);
 
